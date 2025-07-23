@@ -22,7 +22,7 @@ const AlertDialog = ({ message, onClose }: AlertDialogProps) => {
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
 
       <div
-        className={`z-10 m-2 transform rounded-xl bg-white p-6 shadow-2xl transition-transform duration-300 ${
+        className={`z-10 m-2 transform rounded-xl bg-stone-200 p-6 shadow-2xl transition-transform duration-300 ${
           visible ? 'scale-100' : 'scale-90'
         }`}
       >

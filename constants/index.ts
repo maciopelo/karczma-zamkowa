@@ -1,8 +1,8 @@
 export const sections = {
   home: 'home',
-  about: 'about',
-  restaurant: 'restaurant',
   menu: 'menu',
+  offer: 'offer',
+  gallery: 'galeria',
   contact: 'contact',
 };
 
@@ -14,11 +14,11 @@ export const INSTAGRAM_LINK = 'https://www.instagram.com';
 export const navigationItems = [
   {
     label: 'Menu',
-    href: `/#${sections.about}`,
+    href: `/${sections.menu}`,
   },
   {
     label: 'Oferta',
-    href: `/#${sections.restaurant}`,
+    href: `/${sections.offer}`,
   },
   {
     label: 'Galeria',

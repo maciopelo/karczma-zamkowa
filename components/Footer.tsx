@@ -5,7 +5,7 @@ import { FACEBOOK_LINK, INSTAGRAM_LINK } from '@/constants';
 
 const Footer = () => {
   return (
-    <footer className="sticky flex items-center justify-between bg-neutral-950/85 px-4 py-6 sm:px-10 md:flex-row">
+    <footer className="sticky flex items-center justify-between bg-neutral-950/95 px-4 py-6 sm:px-10 md:flex-row">
       <div className="flex flex-1 items-center justify-start gap-3 text-left">
         <a href={FACEBOOK_LINK} target="_blank" rel="noopener noreferrer">
           <FacebookIcon />

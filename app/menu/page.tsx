@@ -13,9 +13,9 @@ type MenuSection = {
 };
 
 const Price = ({ meal }: { meal: Meal }) => (
-  <span className="flex items-center text-lg font-bold whitespace-nowrap text-gray-700">
+  <span className="flex items-center text-lg font-bold whitespace-nowrap text-stone-700">
     {meal?.vege && (
-      <span className="ml-2 h-10 w-10 text-sm text-stone-900">
+      <span className="ml-2 h-10 w-10 text-sm text-green-900">
         <svg
           fill="currentColor"
           xmlns="http://www.w3.org/2000/svg"
@@ -33,10 +33,10 @@ const Menu = () => {
   const menu: MenuSection[] = menuJson;
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-orange-100 px-4 pt-24 md:pt-30">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-stone-200 px-4 pt-24 md:pt-30">
       <div className="md:max-w-4/5 lg:max-w-1/2">
         {menu.map((section) => (
-          <div key={section.section} className="pb-4 text-gray-700">
+          <div key={section.section} className="pb-4 text-stone-700">
             <h2 className="py-3 text-xl font-bold uppercase md:text-2xl">
               {section.section}
             </h2>
