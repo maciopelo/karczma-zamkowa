@@ -2,7 +2,11 @@ export const sections = {
   home: 'home',
   menu: 'menu',
   offer: 'offer',
-  gallery: 'galeria',
+  catering: 'offer/catering',
+  ventures: 'offer/ventures',
+  parties: 'offer/parties',
+  dailyMeals: 'daily-meals',
+  gallery: 'gallery',
   contact: 'contact',
 };
 
@@ -17,12 +21,16 @@ export const navigationItems = [
     href: `/${sections.menu}`,
   },
   {
+    label: 'Dania dnia',
+    href: `/${sections.dailyMeals}`,
+  },
+  {
     label: 'Oferta',
     href: `/${sections.offer}`,
   },
   {
     label: 'Galeria',
-    href: 'Kontakt',
+    href: `/${sections.gallery}`,
   },
   {
     label: 'Kontakt',

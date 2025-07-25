@@ -8,10 +8,10 @@ const Footer = () => {
     <footer className="sticky flex items-center justify-between bg-neutral-950/95 px-4 py-6 sm:px-10 md:flex-row">
       <div className="flex flex-1 items-center justify-start gap-3 text-left">
         <a href={FACEBOOK_LINK} target="_blank" rel="noopener noreferrer">
-          <FacebookIcon />
+          <FacebookIcon className="mr-4 fill-stone-200" />
         </a>
         <a href={INSTAGRAM_LINK} target="_blank" rel="noopener noreferrer">
-          <InstagramIcon />
+          <InstagramIcon className="fill-stone-200" />
         </a>
       </div>
 

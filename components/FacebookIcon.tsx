@@ -1,9 +1,18 @@
-export const FacebookIcon = () => (
+import { cn } from '@/lib/utils';
+
+interface Props {
+  className?: string;
+}
+
+export const FacebookIcon = ({ className }: Props) => (
   <svg
     viewBox="0,0,256,256"
     width="25px"
     height="25px"
-    className="scale-150 fill-stone-500 transition-colors hover:fill-stone-500 md:scale-100 md:fill-stone-200"
+    className={cn(
+      'scale-150 transition-colors hover:fill-stone-500 sm:fill-stone-900 md:scale-100 md:fill-stone-200',
+      className,
+    )}
   >
     <g transform="scale(5.12,5.12)">
       <path d="M25,3c-12.13844,0 -22,9.86156 -22,22c0,11.01913 8.12753,20.13835 18.71289,21.72852l1.14844,0.17383v-17.33594h-5.19727v-3.51953h5.19727v-4.67383c0,-2.87808 0.69065,-4.77363 1.83398,-5.96289c1.14334,-1.18926 2.83269,-1.78906 5.18359,-1.78906c1.87981,0 2.61112,0.1139 3.30664,0.19922v2.88086h-2.44727c-1.38858,0 -2.52783,0.77473 -3.11914,1.80664c-0.59131,1.03191 -0.77539,2.264 -0.77539,3.51953v4.01758h6.12305l-0.54492,3.51953h-5.57812v17.36523l1.13477,-0.1543c10.73582,-1.45602 19.02148,-10.64855 19.02148,-21.77539c0,-12.13844 -9.86156,-22 -22,-22z" />
