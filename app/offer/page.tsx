@@ -5,7 +5,7 @@ import Link from 'next/link';
 const Offer = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-start bg-stone-200 px-4 pt-24 md:pt-30">
-      <div className="max-w-4xl text-stone-900">
+      <div className="max-w-4xl text-stone-700">
         <h1 className="mb-6 text-2xl font-bold uppercase">Nasza Oferta</h1>
         <p className="text-lg">
           Organizujemy wyjątkowe wydarzenia – od urodzin i komunii, po przyjęcia

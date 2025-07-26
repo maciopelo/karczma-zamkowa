@@ -8,6 +8,7 @@ export const sections = {
   dailyMeals: 'daily-meals',
   gallery: 'gallery',
   contact: 'contact',
+  alternative: 'alternative',
 };
 
 export const FACEBOOK_LINK =
@@ -16,6 +17,11 @@ export const FACEBOOK_LINK =
 export const INSTAGRAM_LINK = 'https://www.instagram.com';
 
 export const navigationItems = [
+  {
+    label: 'Alternatywny ',
+    href: `/${sections.alternative}`,
+  },
+
   {
     label: 'Menu',
     href: `/${sections.menu}`,

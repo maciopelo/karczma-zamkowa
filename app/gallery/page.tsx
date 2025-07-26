@@ -22,7 +22,7 @@ const Gallery = () => {
 
   return (
     <div className="flex min-h-screen flex-col items-center bg-stone-200 px-4 pt-24 md:pt-30">
-      <div className="w-full max-w-6xl text-stone-900">
+      <div className="w-full max-w-6xl text-stone-700">
         <h1 className="mb-6 text-2xl font-bold uppercase">Galeria</h1>
         <p className="mb-6 text-lg">
           Zobacz nasze wnętrza, potrawy i chwile z naszych wydarzeń.
