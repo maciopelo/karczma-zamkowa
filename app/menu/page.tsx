@@ -1,18 +1,34 @@
-import menuJson from '@/constants/menu.json';
+interface IMenuMealResponse {
+  id: number;
+  acf: {
+    name: string;
+    description: string;
+    price: number;
+    vege: boolean;
+  };
+}
+interface IMenuCategoryResponse {
+  id: number;
+  acf: {
+    name: string;
+    meals: number[];
+  };
+}
 
-type Meal = {
+interface IMenuMeal {
+  id: number;
   name: string;
-  description?: string;
-  price?: number;
-  vege?: boolean;
-};
+  description: string;
+  price: number;
+  vege: boolean;
+}
+interface IMenuCategory {
+  id: number;
+  name: string;
+  meals: IMenuMeal[];
+}
 
-type MenuSection = {
-  section: string;
-  meals: Meal[];
-};
-
-const Price = ({ meal }: { meal: Meal }) => (
+const Price = ({ meal }: { meal: IMenuMeal }) => (
   <span className="flex items-center text-lg font-bold whitespace-nowrap text-stone-700">
     {meal?.vege && (
       <span className="ml-2 h-10 w-10 text-sm text-green-900">
@@ -29,19 +45,51 @@ const Price = ({ meal }: { meal: Meal }) => (
   </span>
 );
 
-const Menu = () => {
-  const menu: MenuSection[] = menuJson;
+const fetchMenu = async () => {
+  const params = '?per_page=50&orderby=date&order=asc';
+  const categoriesResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_CMS_API_URL}/menu-category${params}`,
+  );
+  const categories = await categoriesResponse.json();
+  console.log('🚀 ~ fetchMenu ~ categories:', categories);
+
+  const mealsResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_CMS_API_URL}/menu-meal${params}`,
+  );
+  const meals = await mealsResponse.json();
+  console.log('🚀 ~ fetchMenu ~ meals:', meals);
+
+  const categoriesWithMeals = categories.map(
+    (category: IMenuCategoryResponse) => {
+      const mealsIds = category.acf.meals;
+      const matchedMeals = meals
+        .filter((meal: IMenuMealResponse) => mealsIds.includes(meal.id))
+        .map((meal: IMenuMealResponse) => ({ id: meal.id, ...meal.acf }));
+
+      return {
+        id: category.id,
+        ...category.acf,
+        meals: matchedMeals,
+      };
+    },
+  );
+
+  return categoriesWithMeals;
+};
+
+const Menu = async () => {
+  const categories = await fetchMenu();
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-stone-200 px-4 pt-24 md:pt-30">
       <div className="md:max-w-4/5 lg:max-w-1/2">
-        {menu.map((section) => (
-          <div key={section.section} className="pb-4 text-stone-700">
+        {categories.map((category: IMenuCategory) => (
+          <div key={category.id} className="pb-4 text-stone-700">
             <h2 className="py-3 text-xl font-bold uppercase md:text-2xl">
-              {section.section}
+              {category.name}
             </h2>
             <ul>
-              {section.meals.map((meal) => (
+              {category.meals.map((meal: IMenuMeal) => (
                 <li
                   key={meal.name}
                   className="relative mb-6 flex flex-col gap-2"

@@ -1,63 +1,92 @@
-const meals = [
-  {
-    day: 'PONIEDZIAŁEK',
-    date: '21.07.25',
-    dish: 'Tortilla z mięsem mielonym i warzywami / kompot',
-  },
-  {
-    day: 'WTOREK',
-    date: '22.07.25',
-    dish: 'Gołąbek w sosie pomidorowym / ziemniaki / kompot',
-  },
-  {
-    day: 'ŚRODA',
-    date: '23.07.25',
-    dish: 'Schab faszerowany warzywami / frytki / surówka / kompot',
-  },
-  {
-    day: 'CZWARTEK',
-    date: '24.07.25',
-    dish: 'Klopsiki drobiowe w sosie / kluski / surówka / kompot',
-  },
-  {
-    day: 'PIĄTEK',
-    date: '25.07.25',
-    dish: 'Naleśniki z brokułem i serem / kompot',
-  },
-];
+import { format, addDays, parse } from 'date-fns';
+import { pl } from 'date-fns/locale';
 
-const Menu = () => {
+interface IDailyMeals {
+  id: number;
+  'start-date': string;
+  monday: string;
+  tuesday: string;
+  wednesday: string;
+  thursday: string;
+  friday: string;
+  'set-price': number;
+  'soup-price': number;
+  'daily-meal-price': number;
+}
+
+function getMealsWithDays(dailyMeals: IDailyMeals) {
+  // Parse input like '20250723' into a Date
+  const startDate = parse(dailyMeals['start-date'], 'yyyyMMdd', new Date());
+
+  for (let i = 0; i < 5; i++) {}
+
+  return [
+    dailyMeals.monday,
+    dailyMeals.tuesday,
+    dailyMeals.wednesday,
+    dailyMeals.thursday,
+    dailyMeals.friday,
+  ].map((meal, idx) => {
+    const currDate = addDays(startDate, idx);
+
+    // Format: "środa, 23.07.2025"
+    const [day, date] = format(currDate, 'EEEE, dd.MM.yyyy', {
+      locale: pl,
+    }).split(',');
+    return { meal, day, date };
+  });
+}
+
+const fetchDailyMeals = async () => {
+  const dailyMealsResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_CMS_API_URL}/daily-meal`,
+  );
+
+  const dailyMeals = await dailyMealsResponse.json();
+
+  const result = {
+    id: dailyMeals[0].id,
+    ...dailyMeals[0].acf,
+  } as IDailyMeals;
+
+  return result;
+};
+
+const Menu = async () => {
+  const dailyMeals = await fetchDailyMeals();
+  const days = getMealsWithDays(dailyMeals);
+
   return (
     <div className="flex min-h-[calc(100vh-73px)] flex-col items-center justify-start bg-stone-200 px-4 pt-24 md:pt-30">
       <div className="md:max-w-4/5 lg:max-w-1/2">
         <div className="pb-4 text-stone-700">
           <h2 className="py-3 text-xl font-bold uppercase md:text-2xl">
-            Dania dnia
+            Danie dnia {dailyMeals['daily-meal-price']} zł
           </h2>
-          <div className="mb-4 h-1 w-40 bg-stone-700" />
+          <div className="mb-4 h-1 w-52 bg-stone-700" />
           <ul>
-            {meals.map((meal) => (
-              <li key={meal.day} className="relative mb-8 flex flex-col gap-2">
+            {days.map((day) => (
+              <li key={day.day} className="relative mb-8 flex flex-col gap-2">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg uppercase md:text-xl">
-                    <span className="font-medium">{meal.day} </span>
-                    {meal.date}
+                    <span className="font-medium">{day.day} </span>
+                    {day.date}
                   </h3>
                   <span className="block md:hidden"></span>
                 </div>
 
-                <p className="md:text-md text-base">{meal.dish}</p>
+                <p className="md:text-md text-base">{day.meal}</p>
                 <p className="absolute top-1/2 right-0 hidden items-center text-lg font-medium md:top-0 md:flex"></p>
               </li>
             ))}
             <li className="mb-4">
               <span className="font-semibold uppercase">
-                Zestaw dnia - 28 zł
+                Zestaw dnia - {dailyMeals['set-price']} zł
               </span>
             </li>
             <li>
               <span className="font-semibold uppercase">
-                Zupani dnia - 8 zł
+                Zupa dnia - {dailyMeals['soup-price']} zł
               </span>
             </li>
           </ul>
