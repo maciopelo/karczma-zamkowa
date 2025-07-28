@@ -2,13 +2,12 @@ export const sections = {
   home: 'home',
   menu: 'menu',
   offer: 'offer',
-  catering: 'offer/catering',
-  ventures: 'offer/ventures',
-  parties: 'offer/parties',
+  catering: 'catering',
+  ventures: 'ventures',
+  parties: 'parties',
   dailyMeals: 'daily-meals',
   gallery: 'gallery',
   contact: 'contact',
-  alternative: 'alternative',
 };
 
 export const FACEBOOK_LINK =
@@ -17,11 +16,6 @@ export const FACEBOOK_LINK =
 export const INSTAGRAM_LINK = 'https://www.instagram.com';
 
 export const navigationItems = [
-  {
-    label: 'Alternatywny ',
-    href: `/${sections.alternative}`,
-  },
-
   {
     label: 'Menu',
     href: `/${sections.menu}`,

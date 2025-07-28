@@ -6,7 +6,7 @@ import { InstagramIcon } from './InstagramIcon';
 
 export function DesktopNavigation() {
   return (
-    <nav className="hidden md:block">
+    <nav className="hidden lg:block">
       <ul className="flex">
         {navigationItems.map((item) => (
           <li

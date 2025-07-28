@@ -11,7 +11,7 @@ export function MobileNavigation() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="block md:hidden">
+    <div className="block lg:hidden">
       <HamburgerButton open={open} onClick={() => setOpen(!open)} />
 
       <div

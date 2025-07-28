@@ -32,7 +32,7 @@ const Menu = () => {
       <div className="md:max-w-4/5 lg:max-w-1/2">
         <div className="pb-4 text-stone-700">
           <h2 className="py-3 text-xl font-bold uppercase md:text-2xl">
-            Danie dnia
+            Dania dnia
           </h2>
           <div className="mb-4 h-1 w-40 bg-stone-700" />
           <ul>
