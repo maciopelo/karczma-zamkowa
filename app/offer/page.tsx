@@ -20,6 +20,8 @@ export interface IOfferResponse {
   };
 }
 
+export const revalidate = 21600;
+
 const fetchOfferIdsAndNames = async (): Promise<IOffer[]> => {
   const offersResponse = await fetch(
     `${process.env.NEXT_PUBLIC_CMS_API_URL}/offer?_fields=id,acf.name`,

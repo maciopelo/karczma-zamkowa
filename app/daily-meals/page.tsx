@@ -37,6 +37,8 @@ function getMealsWithDays(dailyMeals: IDailyMeals) {
   });
 }
 
+export const revalidate = 3600;
+
 const fetchDailyMeals = async () => {
   const dailyMealsResponse = await fetch(
     `${process.env.NEXT_PUBLIC_CMS_API_URL}/daily-meal?_fields=id,acf`,

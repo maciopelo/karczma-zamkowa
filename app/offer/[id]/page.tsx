@@ -5,6 +5,8 @@ interface Props {
   params: Promise<{ id: string }>;
 }
 
+export const revalidate = 21600;
+
 const fetchOffer = async (id: string) => {
   const offerResponse = await fetch(
     `${process.env.NEXT_PUBLIC_CMS_API_URL}/offer/${id}?_fields=id,acf`,

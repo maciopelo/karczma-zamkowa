@@ -3,6 +3,8 @@ import { notFound, redirect } from 'next/navigation';
 
 const ITEMS_PER_PAGE = 12;
 
+export const revalidate = 21600;
+
 const fetchGallery = async (page: number) => {
   const params = `?_fields=id,source_url&per_page=${ITEMS_PER_PAGE}&page=${page}`;
   const response = await fetch(

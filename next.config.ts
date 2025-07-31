@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       new URL('https://images.unsplash.com/**'),
       new URL('http://localhost:10008/wp-content/**'),
+      new URL('http://serwer371352.lh.pl/public/wp-content/**'),
     ],
   },
 };
