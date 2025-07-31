@@ -19,11 +19,12 @@ const fetchGallery = async (page: number) => {
 };
 
 interface Props {
-  params: { page: string };
+  params: Promise<{ page: string }>;
 }
 
 const GalleryPage = async ({ params }: Props) => {
-  const currentPage = parseInt(params.page, 10);
+  const { page } = await params;
+  const currentPage = parseInt(page, 10);
   if (isNaN(currentPage) || currentPage < 1) return notFound();
 
   const images = await fetchGallery(currentPage);
