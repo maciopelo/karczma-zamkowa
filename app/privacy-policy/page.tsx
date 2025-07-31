@@ -6,7 +6,7 @@ export const metadata = {
 const sections = [
   {
     title: '1. Administrator danych',
-    description: `Administratorem Twoich danych osobowych jest [Imię i nazwisko / nazwa firmy], z siedzibą przy [adres], NIP: [numer NIP]. Kontakt e-mail: [adres e-mail].`,
+    description: `Administratorem Twoich danych osobowych jest Nowak Usługi Gastronomiczne Sp. z o. o. z siedzibą przy ul. Staropolskiej 5, 43-410 Kończyce Małe, NIP: 5482761213.`,
   },
   {
     title: '2. Cele i podstawy przetwarzania',
@@ -46,7 +46,7 @@ const PrivacyPolicy = () => {
           Polityka Prywatności
         </h1>
         <p className="mb-4 text-center text-sm text-stone-500">
-          Data ostatniej aktualizacji: 18.04.2025
+          Data ostatniej aktualizacji: 01.08.2025
         </p>
 
         <section className="space-y-8 text-justify text-lg leading-relaxed">

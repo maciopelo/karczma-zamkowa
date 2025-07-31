@@ -39,7 +39,7 @@ function getMealsWithDays(dailyMeals: IDailyMeals) {
 
 const fetchDailyMeals = async () => {
   const dailyMealsResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_CMS_API_URL}/daily-meal`,
+    `${process.env.NEXT_PUBLIC_CMS_API_URL}/daily-meal?_fields=id,acf`,
   );
 
   const dailyMeals = await dailyMealsResponse.json();

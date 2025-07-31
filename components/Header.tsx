@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <header
       id={sections.home}
-      className="fixed top-0 z-20 flex h-20 w-full items-center justify-between bg-neutral-950/85 px-4 lg:px-10"
+      className="fixed top-0 z-20 flex h-20 w-full items-center justify-between bg-neutral-950/95 px-4 lg:px-10"
     >
       <Link href="/">
         <Image

@@ -46,18 +46,16 @@ const Price = ({ meal }: { meal: IMenuMeal }) => (
 );
 
 const fetchMenu = async () => {
-  const params = '?per_page=50&orderby=date&order=asc';
+  const params = '?per_page=50&orderby=date&order=asc&_fields=id,acf';
   const categoriesResponse = await fetch(
     `${process.env.NEXT_PUBLIC_CMS_API_URL}/menu-category${params}`,
   );
   const categories = await categoriesResponse.json();
-  console.log('🚀 ~ fetchMenu ~ categories:', categories);
 
   const mealsResponse = await fetch(
     `${process.env.NEXT_PUBLIC_CMS_API_URL}/menu-meal${params}`,
   );
   const meals = await mealsResponse.json();
-  console.log('🚀 ~ fetchMenu ~ meals:', meals);
 
   const categoriesWithMeals = categories.map(
     (category: IMenuCategoryResponse) => {
