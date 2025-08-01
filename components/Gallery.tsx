@@ -3,14 +3,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-interface Image {
+interface IImage {
   id: number;
   source_url: string;
 }
 
 interface Props {
   page: number;
-  images: Image[];
+  images: IImage[];
 }
 
 const Gallery = ({ images, page }: Props) => {

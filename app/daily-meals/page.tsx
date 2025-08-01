@@ -37,7 +37,7 @@ function getMealsWithDays(dailyMeals: IDailyMeals) {
   });
 }
 
-export const revalidate = 3600;
+export const revalidate = 900;
 
 const fetchDailyMeals = async () => {
   const dailyMealsResponse = await fetch(

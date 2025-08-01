@@ -24,13 +24,14 @@ export const revalidate = 21600;
 
 const fetchOfferIdsAndNames = async (): Promise<IOffer[]> => {
   const offersResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_CMS_API_URL}/offer?_fields=id,acf.name`,
+    `${process.env.NEXT_PUBLIC_CMS_API_URL}/offer?_fields=id,slug,acf.name`,
   );
 
   const offers = await offersResponse.json();
 
   return offers.map((offer: IOfferResponse) => ({
     id: offer.id,
+    slug: offer.slug,
     ...offer.acf,
   }));
 };
@@ -52,7 +53,7 @@ const Offer = async () => {
           {offers.map((offer) => (
             <Link
               key={offer.id}
-              href={`/${sections.offer}/${offer.id}`}
+              href={`/${sections.offer}/${offer.slug}`}
               className="flex basis-full items-center justify-center rounded-xl border-2 border-stone-900 bg-stone-200 px-6 py-4 text-center text-xl font-semibold text-stone-900 uppercase transition-all duration-300 hover:border-stone-200 hover:bg-stone-950 hover:text-stone-200 sm:basis-[48%] lg:basis-[31%]"
             >
               {offer.name}

@@ -3,12 +3,24 @@ import { notFound, redirect } from 'next/navigation';
 
 const ITEMS_PER_PAGE = 12;
 
-export const revalidate = 21600;
+export async function generateStaticParams() {
+  const offersResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_CMS_API_URL}/media`,
+  );
+  const total = Number(offersResponse.headers.get('X-WP-Total')) || 0;
+
+  return Array.from({ length: Math.ceil(total / ITEMS_PER_PAGE) }, (_, i) => ({
+    page: (i + 1).toString(),
+  }));
+}
 
 const fetchGallery = async (page: number) => {
   const params = `?_fields=id,source_url&per_page=${ITEMS_PER_PAGE}&page=${page}`;
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_CMS_API_URL}/media${params}`,
+    {
+      next: { revalidate: 21600 },
+    },
   );
 
   if (!response.ok) {
