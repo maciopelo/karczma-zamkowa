@@ -10,10 +10,11 @@ interface IImage {
 
 interface Props {
   page: number;
+  pages?: number;
   images: IImage[];
 }
 
-const Gallery = ({ images, page }: Props) => {
+const Gallery = ({ images, page, pages }: Props) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
@@ -47,7 +48,7 @@ const Gallery = ({ images, page }: Props) => {
             <span className="mb-1">&#8592;</span>
           </Link>
           <Link
-            href={`/gallery/${page + 1}`}
+            href={`/gallery/${pages && page < pages ? page + 1 : 1}`}
             className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-stone-700 text-xl text-stone-200 shadow hover:bg-stone-400 disabled:opacity-50"
             aria-label="Następny"
           >

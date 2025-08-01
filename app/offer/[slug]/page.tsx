@@ -3,6 +3,7 @@ import React from 'react';
 import { IOffer } from '../page';
 import Link from 'next/link';
 import { sections } from '@/constants';
+import { get } from '@/lib/utils';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -11,10 +12,9 @@ interface Props {
 export const revalidate = 21600; // 6 hours
 
 export async function generateStaticParams() {
-  const offersResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_CMS_API_URL}/offer?_fields=slug`,
-  );
-  const offers = await offersResponse.json();
+  const offers = await get('/offer', {
+    _fields: 'slug',
+  });
 
   return offers.map((offer: IOffer) => ({
     slug: offer.slug,
@@ -22,17 +22,14 @@ export async function generateStaticParams() {
 }
 
 const fetchOffer = async (slug: string) => {
-  const offerResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_CMS_API_URL}/offer?slug=${slug}&_fields=id,acf`,
-  );
+  const [offer] = await get('/offer', {
+    slug,
+    _fields: 'id,acf',
+  });
 
-  const [offer] = await offerResponse.json();
-
-  const imageResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_CMS_API_URL}/media/${offer.acf.image}?_fields=source_url`,
-  );
-
-  const imageUrl = await imageResponse.json();
+  const imageUrl = await get(`/media/${offer.acf.image}`, {
+    _fields: 'source_url',
+  });
 
   return { ...offer.acf, image: imageUrl.source_url };
 };

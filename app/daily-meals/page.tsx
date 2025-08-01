@@ -1,3 +1,4 @@
+import { get } from '@/lib/utils';
 import { format, addDays, parse } from 'date-fns';
 import { pl } from 'date-fns/locale';
 
@@ -40,11 +41,9 @@ function getMealsWithDays(dailyMeals: IDailyMeals) {
 export const revalidate = 900;
 
 const fetchDailyMeals = async () => {
-  const dailyMealsResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_CMS_API_URL}/daily-meal?_fields=id,acf`,
-  );
-
-  const dailyMeals = await dailyMealsResponse.json();
+  const dailyMeals = await get('/daily-meal', {
+    _fields: 'id,acf',
+  });
 
   const result = {
     id: dailyMeals[0].id,

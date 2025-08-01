@@ -1,4 +1,5 @@
 import { sections } from '@/constants';
+import { get } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -28,11 +29,9 @@ export interface IOfferResponse {
 export const revalidate = 21600;
 
 const fetchOfferIdsAndNames = async (): Promise<IOffer[]> => {
-  const offersResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_CMS_API_URL}/offer?_fields=id,slug,acf.name`,
-  );
-
-  const offers = await offersResponse.json();
+  const offers = await get('/offer', {
+    _fields: 'id,slug,acf.name',
+  });
 
   return offers.map((offer: IOfferResponse) => ({
     id: offer.id,

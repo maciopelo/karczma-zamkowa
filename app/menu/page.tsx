@@ -1,3 +1,5 @@
+import { get } from '@/lib/utils';
+
 interface IMenuMealResponse {
   id: number;
   acf: {
@@ -66,16 +68,15 @@ const Price = ({ meal }: { meal: IMenuMeal }) => (
 export const revalidate = 21600; // 6 hours
 
 const fetchMenu = async () => {
-  const params = '?per_page=50&orderby=date&order=asc&_fields=id,acf';
-  const categoriesResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_CMS_API_URL}/menu-category${params}`,
-  );
-  const categories = await categoriesResponse.json();
+  const params = {
+    per_page: 50,
+    orderby: 'date',
+    order: 'asc',
+    _fields: 'id,acf',
+  };
+  const categories = await get('/menu-category', params);
 
-  const mealsResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_CMS_API_URL}/menu-meal${params}`,
-  );
-  const meals = await mealsResponse.json();
+  const meals = await get('/menu-meal', params);
 
   const categoriesWithMeals = categories.map(
     (category: IMenuCategoryResponse) => {
