@@ -81,6 +81,14 @@ const ContactForm = () => {
     }
   };
 
+  const handleCheckboxChange = () => {
+    setIsError('');
+    setFormData((prevData) => ({
+      ...prevData,
+      carbonCopy: !formData.carbonCopy,
+    }));
+  };
+
   return (
     <div>
       <h2 className="mb-6 text-3xl font-bold text-stone-900 sm:text-4xl">
@@ -128,17 +136,15 @@ const ContactForm = () => {
             type="checkbox"
             id="carbonCopy"
             name="carbonCopy"
-            onChange={(e) =>
-              setFormData((prevData) => ({
-                ...prevData,
-                carbonCopy: e.target.checked,
-              }))
-            }
+            onChange={handleCheckboxChange}
             checked={formData.carbonCopy}
             className="peer hidden"
           />
 
-          <div className="mr-2 flex h-5 w-5 cursor-pointer items-center justify-center rounded border border-gray-300 transition peer-checked:border-stone-900 peer-checked:bg-stone-900">
+          <div
+            onClick={handleCheckboxChange}
+            className="mr-2 flex h-5 w-5 cursor-pointer items-center justify-center rounded border border-gray-300 transition peer-checked:border-stone-900 peer-checked:bg-stone-900"
+          >
             {formData.carbonCopy && <Check className="text-red h-4 w-4" />}
           </div>
 
