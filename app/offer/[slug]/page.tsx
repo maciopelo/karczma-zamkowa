@@ -8,6 +8,8 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+export const revalidate = 21600; // 6 hours
+
 export async function generateStaticParams() {
   const offersResponse = await fetch(
     `${process.env.NEXT_PUBLIC_CMS_API_URL}/offer?_fields=slug`,
@@ -28,7 +30,6 @@ const fetchOffer = async (slug: string) => {
 
   const imageResponse = await fetch(
     `${process.env.NEXT_PUBLIC_CMS_API_URL}/media/${offer.acf.image}?_fields=source_url`,
-    { next: { revalidate: 21600 } },
   );
 
   const imageUrl = await imageResponse.json();

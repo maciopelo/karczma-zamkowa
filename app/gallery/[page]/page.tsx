@@ -3,6 +3,8 @@ import { notFound, redirect } from 'next/navigation';
 
 const ITEMS_PER_PAGE = 12;
 
+export const revalidate = 21600; // 6 hours
+
 export async function generateStaticParams() {
   const offersResponse = await fetch(
     `${process.env.NEXT_PUBLIC_CMS_API_URL}/media`,
@@ -18,9 +20,6 @@ const fetchGallery = async (page: number) => {
   const params = `?_fields=id,source_url&per_page=${ITEMS_PER_PAGE}&page=${page}`;
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_CMS_API_URL}/media${params}`,
-    {
-      next: { revalidate: 21600 },
-    },
   );
 
   if (!response.ok) {

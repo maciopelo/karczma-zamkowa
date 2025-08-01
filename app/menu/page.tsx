@@ -45,7 +45,7 @@ const Price = ({ meal }: { meal: IMenuMeal }) => (
   </span>
 );
 
-export const revalidate = 21600;
+export const revalidate = 21600; // 6 hours
 
 const fetchMenu = async () => {
   const params = '?per_page=50&orderby=date&order=asc&_fields=id,acf';
