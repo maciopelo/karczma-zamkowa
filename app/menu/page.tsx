@@ -28,6 +28,24 @@ interface IMenuCategory {
   meals: IMenuMeal[];
 }
 
+// export const metadata = {
+//   title: 'Karczma Zamkowa – Menu',
+//   description: 'Sprawdź nasze menu pełne tradycyjnych polskich dań.',
+//   keywords: [
+//     'menu restauracji Kończyce Małe',
+//     'dania polskie',
+//     'Karczma Zamkowa menu',
+//     'tradycyjne potrawy',
+//   ],
+//   openGraph: {
+//     title: 'Karczma Zamkowa – Menu',
+//     description: 'Odkryj nasze wyjątkowe menu z tradycyjnymi daniami.',
+//     url: 'https://karczma-zamkowa.pl/menu',
+//     siteName: 'Karczma Zamkowa',
+//   },
+//   metadataBase: new URL('https://karczma-zamkowa.pl'),
+// };
+
 const Price = ({ meal }: { meal: IMenuMeal }) => (
   <span className="flex items-center text-lg font-bold whitespace-nowrap text-stone-700">
     {meal?.vege && (

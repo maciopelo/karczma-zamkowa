@@ -20,6 +20,11 @@ export interface IOfferResponse {
   };
 }
 
+// export const metadata = {
+//   title: 'Karczma Zamkowa – Nasza Oferta',
+//   description: 'Sprawdź naszą ofertę organizacji przyjęć i wydarzeń.',
+// };
+
 export const revalidate = 21600;
 
 const fetchOfferIdsAndNames = async (): Promise<IOffer[]> => {
