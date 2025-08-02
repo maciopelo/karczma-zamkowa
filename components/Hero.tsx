@@ -54,14 +54,14 @@ const nav = [
 const Hero = () => {
   return (
     <section
-      className="h-screen w-full bg-neutral-600/85 bg-cover bg-center px-4 pt-20 bg-blend-multiply"
+      className="h-full w-full bg-neutral-600/85 bg-cover bg-center px-4 pt-25 bg-blend-multiply sm:pt-15"
       style={{ backgroundImage: "url('/hero3.webp')" }}
     >
-      <div className="flex h-full w-full flex-col items-center justify-center gap-10 pb-10 text-4xl text-white sm:gap-10 md:py-30">
+      <div className="flex h-full w-full flex-col items-center justify-center gap-7 pb-10 text-4xl text-white sm:h-screen sm:gap-10 md:py-30">
         <h1
           className={cn(
             parisienne.className,
-            'text-center text-4xl sm:text-5xl',
+            'text-center text-3xl sm:text-5xl',
           )}
         >
           Witaj w Karczmie Zamkowej - ucztuj bez końca!
@@ -69,15 +69,12 @@ const Hero = () => {
         <p
           className={cn(
             parisienne.className,
-            'max-w-xl text-center text-lg text-stone-200 sm:text-2xl',
+            'text-center text-base text-stone-200 sm:text-2xl',
           )}
         >
           Poznaj smaki tradycyjnej kuchni polskiej w Kończycach Małych.
         </p>
-        <nav
-          className="flex flex-wrap items-center justify-center gap-5 sm:gap-10 xl:gap-20"
-          aria-label="Główna nawigacja"
-        >
+        <nav className="flex flex-wrap items-center justify-center gap-5 sm:gap-10 xl:gap-20">
           {nav.map((item) => (
             <Link
               key={item.label}
