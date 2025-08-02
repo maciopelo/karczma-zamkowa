@@ -3,55 +3,57 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { Parisienne } from 'next/font/google';
 import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 
-// export const metadata = {
-//   title: 'Karczma Zamkowa – Tradycyjna Polska Restauracja w Kończycach Małych',
-//   description:
-//     'Karczma Zamkowa – wyjątkowa kuchnia polska w sercu Kończyc Małych. Zarezerwuj stolik już dziś!',
-//   keywords: [
-//     'restauracja Kończyce Małe',
-//     'kuchnia polska',
-//     'Karczma Zamkowa',
-//     'tradycyjne jedzenie',
-//     'dania dnia Kończyce Małe',
-//   ],
-//   openGraph: {
-//     title: 'Karczma Zamkowa – Polska Restauracja w Kończycach Małych',
-//     description: 'Poznaj tradycyjne smaki kuchni polskiej w Karczmie Zamkowej.',
-//     url: 'https://karczma-zamkowa.pl',
-//     siteName: 'Karczma Zamkowa',
-//     images: [
-//       {
-//         url: 'https://karczma-zamkowa.vercel.app/og-image.jpg',
-//         width: 1200,
-//         height: 630,
-//         alt: 'Karczma Zamkowa – Tradycyjna Polska Restauracja',
-//       },
-//     ],
-//     locale: 'pl_PL',
-//     type: 'website',
-//   },
-//   metadataBase: new URL('https://karczma-zamkowa.pl'),
-// };
+export const metadata = {
+  title: 'Karczma Zamkowa – Tradycyjna Polska Restauracja w Kończycach Małych',
+  description:
+    'Karczma Zamkowa – wyjątkowa kuchnia polska w sercu Kończyc Małych. Zarezerwuj stolik już dziś!',
+  keywords: [
+    'restauracja Kończyce Małe',
+    'kuchnia polska',
+    'Karczma Zamkowa',
+    'tradycyjne jedzenie',
+    'dania dnia Kończyce Małe',
+  ],
+  openGraph: {
+    title: 'Karczma Zamkowa – Polska Restauracja w Kończycach Małych',
+    description: 'Poznaj tradycyjne smaki kuchni polskiej w Karczmie Zamkowej.',
+    url: 'https://karczma-zamkowa.pl',
+    siteName: 'Karczma Zamkowa',
+    images: [
+      {
+        url: 'https://karczma-zamkowa.vercel.app/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Karczma Zamkowa – Tradycyjna Polska Restauracja',
+      },
+    ],
+    locale: 'pl_PL',
+    type: 'website',
+  },
+  metadataBase: new URL('https://karczma-zamkowa.pl'),
+};
 
 const parisienne = Parisienne({ weight: '400', subsets: ['latin'] });
 
 const nav = [
   {
     link: `/${sections.menu}`,
-    label: 'Menu',
+    label: 'menu',
   },
   {
     link: `/${sections.dailyMeals}`,
-    label: 'Dania dnia',
+    label: 'dailyMeals',
   },
   {
     link: `/${sections.offer}`,
-    label: 'Oferta',
+    label: 'offer',
   },
 ];
 
-const Hero = () => {
+const Hero = async () => {
+  const t = await getTranslations();
   return (
     <section
       className="h-full w-full bg-neutral-600/85 bg-cover bg-center px-4 pt-25 bg-blend-multiply sm:pt-15"
@@ -64,7 +66,7 @@ const Hero = () => {
             'text-center text-3xl sm:text-5xl',
           )}
         >
-          Witaj w Karczmie Zamkowej - ucztuj bez końca!
+          {t('heroTitle')}
         </h1>
         <p
           className={cn(
@@ -72,7 +74,7 @@ const Hero = () => {
             'text-center text-base text-stone-200 sm:text-2xl',
           )}
         >
-          Poznaj smaki tradycyjnej kuchni polskiej w Kończycach Małych.
+          {t('heroDescription')}
         </p>
         <nav className="flex flex-wrap items-center justify-center gap-5 sm:gap-10 xl:gap-20">
           {nav.map((item) => (
@@ -83,7 +85,7 @@ const Hero = () => {
               className="group relative flex h-35 w-50 items-center justify-center rounded-2xl border border-stone-200 bg-neutral-950/85 uppercase transition-colors duration-300 ease-in-out hover:bg-stone-200 md:h-70 md:w-xs xl:h-80"
             >
               <h2 className="px-10 text-center text-4xl text-stone-200 transition-colors duration-300 ease-in-out group-hover:text-neutral-950 md:text-6xl">
-                {item.label}
+                {t(item.label)}
               </h2>
 
               <Image

@@ -65,7 +65,7 @@ const Price = ({ meal }: { meal: IMenuMeal }) => (
   </span>
 );
 
-export const revalidate = 21600; // 6 hours
+export const revalidate = 1200; // 20 minutes
 
 const fetchMenu = async () => {
   const params = {

@@ -1,34 +1,14 @@
-import type { Metadata } from 'next';
-import { Playfair_Display } from 'next/font/google';
-import './globals.css';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import CookieConsent from '@/components/CookieConsent';
+import { ReactNode } from 'react';
 
-const playfairDisplay = Playfair_Display({
-  subsets: ['latin'],
-});
+interface Props {
+  children: ReactNode;
+}
 
-export const metadata: Metadata = {
-  title: 'Karczma Zamkowa',
-  description: 'Karczma Zamkowa - najlepsze jedzenie w Kończycach Małych',
+// Since we have a `not-found.tsx` page on the root, a layout file
+// is required, even if it's just passing children through.
+
+const RootLayout = ({ children }: Props) => {
+  return children;
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="pl" className="bg-stone-200">
-      <body
-        className={`${playfairDisplay.className} text-stone-200 antialiased`}
-      >
-        <Header />
-        <main>{children}</main>
-        <CookieConsent />
-        <Footer />
-      </body>
-    </html>
-  );
-}
+export default RootLayout;

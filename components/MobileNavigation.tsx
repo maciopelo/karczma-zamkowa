@@ -6,6 +6,7 @@ import { navigationItems } from '@/constants';
 import Link from 'next/link';
 import { FacebookIcon } from './FacebookIcon';
 import { InstagramIcon } from './InstagramIcon';
+import { LocaleSwitcher } from './LocaleSwitcher';
 
 export function MobileNavigation() {
   const [open, setOpen] = useState(false);
@@ -41,6 +42,9 @@ export function MobileNavigation() {
                 )}
               </li>
             ))}
+            <li className="pl-7 text-3xl">
+              <LocaleSwitcher />
+            </li>
           </ul>
         </nav>
       </div>

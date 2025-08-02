@@ -3,6 +3,7 @@ import { navigationItems } from '@/constants';
 import Link from 'next/link';
 import { FacebookIcon } from './FacebookIcon';
 import { InstagramIcon } from './InstagramIcon';
+import { LocaleSwitcher } from './LocaleSwitcher';
 
 export function DesktopNavigation() {
   return (
@@ -28,6 +29,7 @@ export function DesktopNavigation() {
             </button>
           </li>
         ))}
+        <LocaleSwitcher />
       </ul>
     </nav>
   );

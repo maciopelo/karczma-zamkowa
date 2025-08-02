@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 
 const ITEMS_PER_PAGE = 12;
 
-export const revalidate = 21600; // 6 hours
+export const revalidate = 1200; // 20 minutes
 
 export async function generateStaticParams() {
   const offersResponse = await fetch(

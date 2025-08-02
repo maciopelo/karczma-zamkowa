@@ -1,5 +1,6 @@
 import { sections } from '@/constants';
 import { get } from '@/lib/utils';
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -21,12 +22,12 @@ export interface IOfferResponse {
   };
 }
 
-// export const metadata = {
-//   title: 'Karczma Zamkowa – Nasza Oferta',
-//   description: 'Sprawdź naszą ofertę organizacji przyjęć i wydarzeń.',
-// };
+export const metadata = {
+  title: 'Karczma Zamkowa – Nasza Oferta',
+  description: 'Sprawdź naszą ofertę organizacji przyjęć i wydarzeń.',
+};
 
-export const revalidate = 21600;
+export const revalidate = 1200; // 20 minutes
 
 const fetchOfferIdsAndNames = async (): Promise<IOffer[]> => {
   const offers = await get('/offer', {
@@ -42,16 +43,13 @@ const fetchOfferIdsAndNames = async (): Promise<IOffer[]> => {
 
 const Offer = async () => {
   const offers = await fetchOfferIdsAndNames();
+  const t = await getTranslations();
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-start bg-stone-200 px-4 pt-24 md:pt-30">
       <div className="w-full max-w-5xl text-stone-700">
-        <h1 className="mb-6 text-2xl font-bold uppercase">Nasza Oferta</h1>
-        <p className="mb-10 text-lg">
-          Organizujemy wyjątkowe wydarzenia – od urodzin i komunii, po przyjęcia
-          firmowe i spotkania rodzinne. Nasza sala i menu dostosują się do
-          Twoich potrzeb. Sprawdź sam!
-        </p>
+        <h1 className="mb-6 text-2xl font-bold uppercase">{t('ourOffer')}</h1>
+        <p className="mb-10 text-lg">{t('offerDescription')}</p>
 
         <div className="flex flex-wrap items-center justify-center gap-4">
           {offers.map((offer) => (

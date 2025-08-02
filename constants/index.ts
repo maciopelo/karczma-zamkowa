@@ -42,10 +42,10 @@ export const navigationItems = [
     external: true,
     icon: 'facebook',
   },
-  {
-    label: 'Instagram',
-    href: INSTAGRAM_LINK,
-    external: true,
-    icon: 'instagram',
-  },
+  // {
+  //   label: 'Instagram',
+  //   href: INSTAGRAM_LINK,
+  //   external: true,
+  //   icon: 'instagram',
+  // },
 ];

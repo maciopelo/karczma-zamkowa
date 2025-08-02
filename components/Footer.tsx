@@ -2,8 +2,10 @@ import Link from 'next/link';
 import { FacebookIcon } from './FacebookIcon';
 import { InstagramIcon } from './InstagramIcon';
 import { FACEBOOK_LINK, INSTAGRAM_LINK } from '@/constants';
+import { getTranslations } from 'next-intl/server';
 
-const Footer = () => {
+const Footer = async () => {
+  const t = await getTranslations();
   return (
     <footer className="sticky flex items-center justify-between bg-neutral-950/95 px-4 py-6 sm:px-10 md:flex-row">
       <div className="flex flex-1 items-center justify-start gap-3 text-left">
@@ -21,7 +23,7 @@ const Footer = () => {
       </div>
 
       <div className="flex flex-1 items-center justify-end text-right text-sm sm:flex-1">
-        <Link href="/privacy-policy">Polityka prywatności</Link>
+        <Link href="/privacy-policy">{t('privacyPolicy')}</Link>
       </div>
     </footer>
   );

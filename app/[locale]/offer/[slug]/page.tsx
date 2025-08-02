@@ -9,7 +9,7 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
-export const revalidate = 21600; // 6 hours
+export const revalidate = 1200; // 20 minutes
 
 export async function generateStaticParams() {
   const offers = await get('/offer', {

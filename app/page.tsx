@@ -1,15 +1,8 @@
-import Hero from '@/components/Hero';
-import Contact from '@/components/Contact';
+import { redirect } from 'next/navigation';
 
-export const metadata = {
-  title: 'Karczma Zamkowa',
-  description: 'Karczma Zamkowa - Traditional Polish Cuisine',
+// This page only renders when the app is built statically (output: 'export')
+const RootPage = () => {
+  redirect('/');
 };
-export default function Home() {
-  return (
-    <>
-      <Hero />
-      <Contact />
-    </>
-  );
-}
+
+export default RootPage;

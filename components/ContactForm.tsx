@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import AlertDialog from './AlertDialog';
 import { LoaderCircle, Check } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export type FormData = {
   name: string;
@@ -17,6 +18,7 @@ const validateEmail = (value: string): boolean => {
 };
 
 const ContactForm = () => {
+  const t = useTranslations();
   const [isError, setIsError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -48,11 +50,11 @@ const ContactForm = () => {
     e.preventDefault();
     const { name, email, message } = formData;
     if (!name.trim() || !email.trim() || !message.trim()) {
-      setIsError('Prosze wypełnić wszystkie pola formularza.');
+      setIsError(t('requiredFieldsMessage'));
       return;
     }
     if (!validateEmail(email)) {
-      setIsError('Proszę podać poprawny adres e-mail.');
+      setIsError(t('invalidEmailMessage'));
       return;
     }
     try {
@@ -69,12 +71,10 @@ const ContactForm = () => {
         throw new Error(res.statusText);
       }
 
-      showDialog('Wiadomość została wysłana.');
+      showDialog(t('successMessage'));
     } catch (error) {
       console.error('Error sending email:', error);
-      showDialog(
-        'Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.',
-      );
+      showDialog(t('errorMessage'));
     } finally {
       setFormData({ name: '', email: '', message: '', carbonCopy: false });
       setIsLoading(false);
@@ -92,11 +92,10 @@ const ContactForm = () => {
   return (
     <div>
       <h2 className="mb-6 text-3xl font-bold text-stone-900 sm:text-4xl">
-        Skontaktuj się z nami!
+        {t('contactHeader')}
       </h2>
       <p className="mb-4 text-base text-gray-700 sm:text-lg">
-        Masz pytania? Chcesz zarezerwować stolik? Napisz do nas lub zadzwoń!
-        Chętnie pomożemy.{' '}
+        {t('contactDescription')}
         <a
           href="tel:+48123456789"
           className="font-semibold text-black underline hover:text-gray-400"
@@ -109,7 +108,7 @@ const ContactForm = () => {
       <form className="space-y-4" onSubmit={handleSubmit} noValidate>
         <input
           type="text"
-          placeholder="Twoje imię i nazwisko"
+          placeholder={t('yourNameAndSurname')}
           name="name"
           value={formData.name}
           onChange={handleChange}
@@ -117,14 +116,14 @@ const ContactForm = () => {
         />
         <input
           type="email"
-          placeholder="Twój email"
+          placeholder={t('yourEmail')}
           name="email"
           value={formData.email}
           onChange={handleChange}
           className="w-full rounded border border-gray-300 px-4 py-2 text-gray-700 placeholder-gray-500 outline-stone-950"
         />
         <textarea
-          placeholder="Twoja wiadomość"
+          placeholder={t('yourMessage')}
           name="message"
           value={formData.message}
           onChange={handleChange}
@@ -152,7 +151,7 @@ const ContactForm = () => {
             htmlFor="carbonCopy"
             className="cursor-pointer text-sm text-gray-700 select-none"
           >
-            Wyślij kopię do mnie
+            {t('sendCarbonCopy')}
           </label>
         </div>
 
@@ -162,7 +161,11 @@ const ContactForm = () => {
           type="submit"
           className="flex w-[100px] cursor-pointer items-center justify-center rounded bg-stone-950 px-6 py-2 hover:bg-stone-900"
         >
-          {isLoading ? <LoaderCircle className="animate-spin" /> : 'Wyślij'}
+          {isLoading ? (
+            <LoaderCircle className="animate-spin" />
+          ) : (
+            t('sendMessage')
+          )}
         </button>
       </form>
 

@@ -1,4 +1,5 @@
 'use client';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -16,14 +17,13 @@ interface Props {
 
 const Gallery = ({ images, page, pages }: Props) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const t = useTranslations();
 
   return (
     <div className="flex min-h-screen flex-col items-center bg-stone-200 px-4 pt-24 md:pt-30">
       <div className="w-full max-w-6xl text-stone-700">
-        <h1 className="mb-6 text-2xl font-bold uppercase">Galeria</h1>
-        <p className="mb-6 text-lg">
-          Zobacz nasze wnętrza, potrawy i chwile z naszych wydarzeń.
-        </p>
+        <h1 className="mb-6 text-2xl font-bold uppercase">{t('gallery')}</h1>
+        <p className="mb-6 text-lg">{t('galleryDescription')}</p>
 
         <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
           {images.map((image, idx) => (

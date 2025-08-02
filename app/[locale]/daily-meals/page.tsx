@@ -1,6 +1,8 @@
+import { Locale } from '@/i18n/routing';
 import { get } from '@/lib/utils';
 import { format, addDays, parse } from 'date-fns';
-import { pl } from 'date-fns/locale';
+import { pl, enGB, cs } from 'date-fns/locale';
+import { getLocale, getTranslations } from 'next-intl/server';
 
 interface IDailyMeals {
   id: number;
@@ -15,9 +17,15 @@ interface IDailyMeals {
   'daily-meal-price': number;
 }
 
-function getMealsWithDays(dailyMeals: IDailyMeals) {
+function getMealsWithDays(dailyMeals: IDailyMeals, locale: Locale) {
   // Parse input like '20250723' into a Date
   const startDate = parse(dailyMeals['start-date'], 'yyyyMMdd', new Date());
+
+  const localeMap = {
+    pl,
+    en: enGB,
+    cz: cs,
+  };
 
   for (let i = 0; i < 5; i++) {}
 
@@ -32,13 +40,13 @@ function getMealsWithDays(dailyMeals: IDailyMeals) {
 
     // Format: "środa, 23.07.2025"
     const [day, date] = format(currDate, 'EEEE, dd.MM.yyyy', {
-      locale: pl,
+      locale: localeMap[locale] || pl,
     }).split(',');
     return { meal, day, date };
   });
 }
 
-export const revalidate = 900;
+export const revalidate = 1200; // 20 minutes
 
 const fetchDailyMeals = async () => {
   const dailyMeals = await get('/daily-meal', {
@@ -55,14 +63,16 @@ const fetchDailyMeals = async () => {
 
 const Menu = async () => {
   const dailyMeals = await fetchDailyMeals();
-  const days = getMealsWithDays(dailyMeals);
+  const locale = await getLocale();
+  const t = await getTranslations();
+  const days = getMealsWithDays(dailyMeals, locale as Locale);
 
   return (
     <div className="flex min-h-[calc(100vh-73px)] flex-col items-center justify-start bg-stone-200 px-4 pt-24 md:pt-30">
       <div className="md:max-w-4/5 lg:max-w-1/2">
         <div className="pb-4 text-stone-700">
           <h2 className="py-3 text-xl font-bold uppercase md:text-2xl">
-            Danie dnia {dailyMeals['daily-meal-price']} zł
+            {t('dailyMeal')} {dailyMeals['daily-meal-price']} zł
           </h2>
           <div className="mb-4 h-1 w-52 bg-stone-700" />
           <ul>
@@ -82,12 +92,12 @@ const Menu = async () => {
             ))}
             <li className="mb-4">
               <span className="font-semibold uppercase">
-                Zestaw dnia - {dailyMeals['set-price']} zł
+                {t('dailySet')} - {dailyMeals['set-price']} zł
               </span>
             </li>
             <li>
               <span className="font-semibold uppercase">
-                Zupa dnia - {dailyMeals['soup-price']} zł
+                {t('dailySoup')} - {dailyMeals['soup-price']} zł
               </span>
             </li>
           </ul>

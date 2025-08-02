@@ -1,8 +1,10 @@
 import { sections } from '@/constants';
 import React from 'react';
 import ContactForm from './ContactForm';
+import { getTranslations } from 'next-intl/server';
 
-const Contact = () => {
+const Contact = async () => {
+  const t = await getTranslations();
   return (
     <section
       className="bg-stone-200 px-4 py-10 sm:px-6 sm:py-16"
@@ -21,17 +23,17 @@ const Contact = () => {
 
           <div>
             <h3 className="mb-2 text-xl font-semibold text-stone-900">
-              Czynne:
+              {t('openingHours')}:
             </h3>
             <ul className="text-gray-700">
               <li className="flex max-w-[12em] justify-between">
-                <span>Pon – Pt:</span> <span>12:00 – 22:00</span>
+                <span>{t('mondayToThursday')}:</span> <span>12:00 – 21:00</span>
               </li>
               <li className="flex max-w-[12em] justify-between">
-                <span>Sobota:</span> <span>10:00 – 23:00</span>
+                <span>{t('fridayToSaturday')}:</span> <span>11:00 – 23:00</span>
               </li>
               <li className="flex max-w-[12em] justify-between">
-                <span>Niedziela:</span> <span>10:00 – 22:00</span>
+                <span>{t('sunday')}:</span> <span>11:00 – 21:00</span>
               </li>
             </ul>
           </div>
