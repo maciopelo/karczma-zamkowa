@@ -1,9 +1,23 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
+import { validateTurnstileToken } from 'next-turnstile';
+import { v4 } from 'uuid';
 
 export async function POST(request: NextRequest) {
-  const { email, name, message, carbonCopy } = await request.json();
+  const { email, name, message, carbonCopy, token } = await request.json();
+
+  const validationResponse = await validateTurnstileToken({
+    token,
+    secretKey: process.env.TURNSTILE_SECRET_KEY!,
+    idempotencyKey: v4(),
+    sandbox: process.env.NODE_ENV === 'development',
+  });
+
+  if (!validationResponse.success) {
+    return NextResponse.json({ message: 'Invalid token' }, { status: 400 });
+  }
+
   const transport = nodemailer.createTransport({
     host: 'smtp.wp.pl',
     port: 465,

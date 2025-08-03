@@ -2359,6 +2359,11 @@ next-sitemap@^4.2.3:
     fast-glob "^3.2.12"
     minimist "^1.2.8"
 
+next-turnstile@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/next-turnstile/-/next-turnstile-1.0.5.tgz#c4881cc3b1ac440e50343467697f178e2dcbf6be"
+  integrity sha512-DUdmQ0m4lSkHD2nn/Nmh8nAKjYlZD9nXJTaQJJAr0pYE0MUHmwz8bvjex71RuVJaoGRsP7qGnlhuEnXDEuojcw==
+
 next@15.3.1:
   version "15.3.1"
   resolved "https://registry.yarnpkg.com/next/-/next-15.3.1.tgz#69cf2c124e504db64e14fc75eb29bd64c0c787a7"
@@ -3136,6 +3141,11 @@ use-intl@^4.3.4:
     "@formatjs/fast-memoize" "^2.2.0"
     "@schummar/icu-type-parser" "1.21.5"
     intl-messageformat "^10.5.14"
+
+uuid@^11.1.0:
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-11.1.0.tgz#9549028be1753bb934fc96e2bca09bb4105ae912"
+  integrity sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==
 
 which-boxed-primitive@^1.1.0, which-boxed-primitive@^1.1.1:
   version "1.1.1"

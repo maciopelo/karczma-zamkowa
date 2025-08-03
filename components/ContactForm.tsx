@@ -1,8 +1,9 @@
 'use client';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import AlertDialog from './AlertDialog';
 import { LoaderCircle, Check } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { Turnstile } from 'next-turnstile';
 
 export type FormData = {
   name: string;
@@ -19,6 +20,11 @@ const validateEmail = (value: string): boolean => {
 
 const ContactForm = () => {
   const t = useTranslations();
+  const [turnstileStatus, setTurnstileStatus] = useState<
+    'success' | 'error' | 'expired' | 'required'
+  >('required');
+  const [token, setToken] = useState('');
+  const formRef = useRef<HTMLFormElement>(null);
   const [isError, setIsError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -48,6 +54,18 @@ const ContactForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!formRef.current) {
+      setIsLoading(false);
+      return;
+    }
+
+    if (turnstileStatus !== 'success') {
+      setIsError('Please verify you are not a robot');
+      setIsLoading(false);
+      return;
+    }
+
     const { name, email, message } = formData;
     if (!name.trim() || !email.trim() || !message.trim()) {
       setIsError(t('requiredFieldsMessage'));
@@ -61,7 +79,7 @@ const ContactForm = () => {
       setIsLoading(true);
       const res = await fetch('/api/email', {
         method: 'POST',
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, token }),
       });
       if (!res.ok) {
         if (localStorage.getItem('debug') === 'true') {
@@ -105,7 +123,12 @@ const ContactForm = () => {
         .
       </p>
 
-      <form className="space-y-4" onSubmit={handleSubmit} noValidate>
+      <form
+        className="space-y-4"
+        onSubmit={handleSubmit}
+        noValidate
+        ref={formRef}
+      >
         <input
           type="text"
           placeholder={t('yourNameAndSurname')}
@@ -167,6 +190,29 @@ const ContactForm = () => {
             t('sendMessage')
           )}
         </button>
+        <Turnstile
+          siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+          retry="auto"
+          refreshExpired="auto"
+          sandbox={process.env.NODE_ENV === 'development'}
+          onError={() => {
+            setTurnstileStatus('error');
+            setIsError('Security check failed. Please try again.');
+          }}
+          onExpire={() => {
+            setTurnstileStatus('expired');
+            setIsError('Security check expired. Please verify again.');
+          }}
+          onLoad={() => {
+            setTurnstileStatus('required');
+            setIsError('');
+          }}
+          onVerify={(token) => {
+            setToken(token);
+            setTurnstileStatus('success');
+            setIsError('');
+          }}
+        />
       </form>
 
       {isDialogOpen && (
