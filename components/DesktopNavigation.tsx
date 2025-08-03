@@ -4,8 +4,10 @@ import Link from 'next/link';
 import { FacebookIcon } from './FacebookIcon';
 import { InstagramIcon } from './InstagramIcon';
 import { LocaleSwitcher } from './LocaleSwitcher';
+import { getTranslations } from 'next-intl/server';
 
-export function DesktopNavigation() {
+export async function DesktopNavigation() {
+  const t = await getTranslations();
   return (
     <nav className="hidden lg:block">
       <ul className="flex">
@@ -24,7 +26,7 @@ export function DesktopNavigation() {
                   ) : null}
                 </a>
               ) : (
-                <Link href={item.href}>{item.label}</Link>
+                <Link href={item.href}>{t(item.label)}</Link>
               )}
             </button>
           </li>

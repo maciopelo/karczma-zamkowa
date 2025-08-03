@@ -17,23 +17,23 @@ export const INSTAGRAM_LINK = 'https://www.instagram.com';
 
 export const navigationItems = [
   {
-    label: 'Menu',
+    label: 'menu',
     href: `/${sections.menu}`,
   },
   {
-    label: 'Dania dnia',
+    label: 'dailyMeals',
     href: `/${sections.dailyMeals}`,
   },
   {
-    label: 'Oferta',
+    label: 'offer',
     href: `/${sections.offer}`,
   },
   {
-    label: 'Galeria',
+    label: 'gallery',
     href: `/${sections.gallery}`,
   },
   {
-    label: 'Kontakt',
+    label: 'contact',
     href: `/#${sections.contact}`,
   },
   {

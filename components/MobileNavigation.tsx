@@ -7,8 +7,10 @@ import Link from 'next/link';
 import { FacebookIcon } from './FacebookIcon';
 import { InstagramIcon } from './InstagramIcon';
 import { LocaleSwitcher } from './LocaleSwitcher';
+import { useTranslations } from 'next-intl';
 
 export function MobileNavigation() {
+  const t = useTranslations();
   const [open, setOpen] = useState(false);
 
   return (
@@ -38,7 +40,7 @@ export function MobileNavigation() {
                     ) : null}
                   </a>
                 ) : (
-                  <Link href={item.href}>{item.label}</Link>
+                  <Link href={item.href}>{t(item.label)}</Link>
                 )}
               </li>
             ))}
