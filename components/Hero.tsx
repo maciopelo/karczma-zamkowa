@@ -16,22 +16,6 @@ export const metadata = {
     'tradycyjne jedzenie',
     'dania dnia Kończyce Małe',
   ],
-  openGraph: {
-    title: 'Karczma Zamkowa – Polska Restauracja w Kończycach Małych',
-    description: 'Poznaj tradycyjne smaki kuchni polskiej w Karczmie Zamkowej.',
-    url: 'https://karczma-zamkowa.pl',
-    siteName: 'Karczma Zamkowa',
-    images: [
-      {
-        url: 'https://karczma-zamkowa.vercel.app/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Karczma Zamkowa – Tradycyjna Polska Restauracja',
-      },
-    ],
-    locale: 'pl_PL',
-    type: 'website',
-  },
   metadataBase: new URL('https://karczma-zamkowa.pl'),
 };
 
@@ -57,7 +41,7 @@ const Hero = async () => {
   return (
     <section
       className="h-full w-full bg-neutral-600/85 bg-cover bg-center px-4 pt-25 bg-blend-multiply sm:pt-15"
-      style={{ backgroundImage: "url('/hero3.webp')" }}
+      style={{ backgroundImage: "url('/hero.webp')" }}
     >
       <div className="flex h-full w-full flex-col items-center justify-center gap-7 pb-10 text-4xl text-white sm:h-screen sm:gap-10 md:py-30">
         <h1

@@ -67,13 +67,6 @@ export const generateMetadata = async () => {
       'Karczma Zamkowa menu',
       'tradycyjne potrawy',
     ],
-    openGraph: {
-      title: `Karczma Zamkowa - ${t('menu')}`,
-      description: t('menuDescription'),
-      url: 'https://karczma-zamkowa.pl/menu',
-      siteName: 'Karczma Zamkowa',
-    },
-    metadataBase: new URL('https://karczma-zamkowa.pl'),
   };
 };
 
