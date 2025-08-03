@@ -1,50 +1,7 @@
 import { Locale } from '@/i18n/routing';
-import { get } from '@/lib/utils';
-import { format, addDays, parse } from 'date-fns';
-import { pl, enGB, cs } from 'date-fns/locale';
+import { IDailyMeals } from '@/types';
+import { get, getMealsWithDays } from '@/utils';
 import { getLocale, getTranslations } from 'next-intl/server';
-
-interface IDailyMeals {
-  id: number;
-  'start-date': string;
-  monday: string;
-  tuesday: string;
-  wednesday: string;
-  thursday: string;
-  friday: string;
-  'set-price': number;
-  'soup-price': number;
-  'daily-meal-price': number;
-}
-
-function getMealsWithDays(dailyMeals: IDailyMeals, locale: Locale) {
-  // Parse input like '20250723' into a Date
-  const startDate = parse(dailyMeals['start-date'], 'yyyyMMdd', new Date());
-
-  const localeMap = {
-    pl,
-    en: enGB,
-    cz: cs,
-  };
-
-  for (let i = 0; i < 5; i++) {}
-
-  return [
-    dailyMeals.monday,
-    dailyMeals.tuesday,
-    dailyMeals.wednesday,
-    dailyMeals.thursday,
-    dailyMeals.friday,
-  ].map((meal, idx) => {
-    const currDate = addDays(startDate, idx);
-
-    // Format: "środa, 23.07.2025"
-    const [day, date] = format(currDate, 'EEEE, dd.MM.yyyy', {
-      locale: localeMap[locale] || pl,
-    }).split(',');
-    return { meal, day, date };
-  });
-}
 
 export const revalidate = 1200; // 20 minutes
 
@@ -59,6 +16,15 @@ const fetchDailyMeals = async () => {
   } as IDailyMeals;
 
   return result;
+};
+
+export const generateMetadata = async () => {
+  const t = await getTranslations();
+
+  return {
+    title: `Karczma Zamkowa - ${t('dailyMeals')}`,
+    description: t('dailyMealDescription'),
+  };
 };
 
 const Menu = async () => {

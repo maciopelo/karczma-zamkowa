@@ -1,7 +1,7 @@
-import { sections } from '@/constants';
 import React from 'react';
 import ContactForm from './ContactForm';
 import { getTranslations } from 'next-intl/server';
+import { sections } from '@/constants';
 
 const Contact = async () => {
   const t = await getTranslations();

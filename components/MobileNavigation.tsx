@@ -1,13 +1,13 @@
 'use client';
 import { useState } from 'react';
 import { HamburgerButton } from './HamburgerButton';
-import { cn } from '@/lib/utils';
-import { navigationItems } from '@/constants';
+import { cn } from '@/utils';
 import Link from 'next/link';
 import { FacebookIcon } from './FacebookIcon';
 import { InstagramIcon } from './InstagramIcon';
 import { LocaleSwitcher } from './LocaleSwitcher';
 import { useTranslations } from 'next-intl';
+import { navigationItems } from '@/constants';
 
 export function MobileNavigation() {
   const t = useTranslations();

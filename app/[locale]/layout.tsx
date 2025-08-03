@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import { Playfair_Display } from 'next/font/google';
 import '../../globals.css';
 import Header from '@/components/Header';
@@ -7,15 +6,19 @@ import CookieConsent from '@/components/CookieConsent';
 import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
 });
 
-export const metadata: Metadata = {
-  title: 'Karczma Zamkowa',
-  description: 'Karczma Zamkowa - najlepsze jedzenie w Kończycach Małych',
+export const generateMetadata = async () => {
+  const t = await getTranslations();
+
+  return {
+    title: 'Karczma Zamkowa',
+    description: t('heroDescription'),
+  };
 };
 
 export function generateStaticParams() {

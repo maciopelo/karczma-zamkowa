@@ -1,10 +1,9 @@
-import { navigationItems } from '@/constants';
-
 import Link from 'next/link';
 import { FacebookIcon } from './FacebookIcon';
 import { InstagramIcon } from './InstagramIcon';
 import { LocaleSwitcher } from './LocaleSwitcher';
 import { getTranslations } from 'next-intl/server';
+import { navigationItems } from '@/constants';
 
 export async function DesktopNavigation() {
   const t = await getTranslations();

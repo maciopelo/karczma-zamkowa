@@ -1,10 +1,14 @@
 import Hero from '@/components/Hero';
 import Contact from '@/components/Contact';
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
-export const metadata = {
-  title: 'Karczma Zamkowa',
-  description: 'Karczma Zamkowa - Traditional Polish Cuisine',
+export const generateMetadata = async () => {
+  const t = await getTranslations();
+
+  return {
+    title: 'Karczma Zamkowa',
+    description: t('heroDescription'),
+  };
 };
 
 interface Props {

@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import { FacebookIcon } from './FacebookIcon';
-import { InstagramIcon } from './InstagramIcon';
-import { FACEBOOK_LINK, INSTAGRAM_LINK } from '@/constants';
 import { getTranslations } from 'next-intl/server';
+import { FACEBOOK_LINK } from '@/constants';
 
 const Footer = async () => {
   const t = await getTranslations();
@@ -11,9 +10,6 @@ const Footer = async () => {
       <div className="flex flex-1 items-center justify-start gap-3 text-left">
         <a href={FACEBOOK_LINK} target="_blank" rel="noopener noreferrer">
           <FacebookIcon className="mr-4 fill-stone-200" />
-        </a>
-        <a href={INSTAGRAM_LINK} target="_blank" rel="noopener noreferrer">
-          <InstagramIcon className="fill-stone-200" />
         </a>
       </div>
 

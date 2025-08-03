@@ -2,12 +2,22 @@ import Image from 'next/image';
 import React from 'react';
 import { IOffer } from '../page';
 import Link from 'next/link';
+import { get } from '@/utils';
 import { sections } from '@/constants';
-import { get } from '@/lib/utils';
+import { getTranslations } from 'next-intl/server';
 
-interface Props {
-  params: Promise<{ slug: string }>;
-}
+const fetchOffer = async (slug: string) => {
+  const [offer] = await get('/offer', {
+    slug,
+    _fields: 'id,acf',
+  });
+
+  const imageUrl = await get(`/media/${offer.acf.image}`, {
+    _fields: 'source_url',
+  });
+
+  return { ...offer.acf, image: imageUrl.source_url };
+};
 
 export const revalidate = 1200; // 20 minutes
 
@@ -21,17 +31,18 @@ export async function generateStaticParams() {
   }));
 }
 
-const fetchOffer = async (slug: string) => {
-  const [offer] = await get('/offer', {
-    slug,
-    _fields: 'id,acf',
-  });
+interface Props {
+  params: Promise<{ slug: string }>;
+}
 
-  const imageUrl = await get(`/media/${offer.acf.image}`, {
-    _fields: 'source_url',
-  });
+export const generateMetadata = async ({ params }: Props) => {
+  const { slug } = await params;
+  const t = await getTranslations();
 
-  return { ...offer.acf, image: imageUrl.source_url };
+  return {
+    title: `Karczma Zamkowa - ${t('offer')} - ${slug}`,
+    description: t('offerDescription'),
+  };
 };
 
 export default async function OfferPage({ params }: Props) {

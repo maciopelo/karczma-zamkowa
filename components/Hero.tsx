@@ -1,9 +1,9 @@
-import { sections } from '@/constants';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils';
 import Link from 'next/link';
 import { Parisienne } from 'next/font/google';
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
+import { sections } from '@/constants';
 
 export const metadata = {
   title: 'Karczma Zamkowa – Tradycyjna Polska Restauracja w Kończycach Małych',

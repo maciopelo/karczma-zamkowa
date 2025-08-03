@@ -49,3 +49,5 @@ export const navigationItems = [
   //   icon: 'instagram',
   // },
 ];
+
+export const GALLERY_ITEMS_PER_PAGE = 12;

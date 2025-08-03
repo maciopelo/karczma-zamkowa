@@ -1,8 +1,11 @@
 import { getTranslations } from 'next-intl/server';
 
-export const metadata = {
-  title: 'Polityka Prywatności',
-  description: 'Polityka prywatności strony internetowej.',
+export const generateMetadata = async () => {
+  const t = await getTranslations();
+
+  return {
+    title: `Karczma Zamkowa - ${t('privacyPolicy')}`,
+  };
 };
 
 const sections = [

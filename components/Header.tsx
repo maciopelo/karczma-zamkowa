@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { sections } from '@/constants';
 import Image from 'next/image';
 import { DesktopNavigation } from './DesktopNavigation';
 import { MobileNavigation } from './MobileNavigation';
+import { sections } from '@/constants';
 
 const Header = () => {
   return (

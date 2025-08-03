@@ -1,5 +1,5 @@
 import { sections } from '@/constants';
-import { get } from '@/lib/utils';
+import { get } from '@/utils';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -22,11 +22,6 @@ export interface IOfferResponse {
   };
 }
 
-export const metadata = {
-  title: 'Karczma Zamkowa – Nasza Oferta',
-  description: 'Sprawdź naszą ofertę organizacji przyjęć i wydarzeń.',
-};
-
 export const revalidate = 1200; // 20 minutes
 
 const fetchOfferIdsAndNames = async (): Promise<IOffer[]> => {
@@ -39,6 +34,15 @@ const fetchOfferIdsAndNames = async (): Promise<IOffer[]> => {
     slug: offer.slug,
     ...offer.acf,
   }));
+};
+
+export const generateMetadata = async () => {
+  const t = await getTranslations();
+
+  return {
+    title: `Karczma Zamkowa - ${t('offer')}`,
+    description: t('offerDescription'),
+  };
 };
 
 const Offer = async () => {
